@@ -5,7 +5,9 @@ const server = fastify({
 
 server.get('/', async (request, reply) => {
     reply.type('application/json').code(200)
-    return {hello: 'world'}
+    return {
+      hello: 'world'
+    }
 })
 
 server.listen(3000, (err, address) => {
