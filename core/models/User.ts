@@ -1,5 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
+// Model
 @Entity()
 class User {
   @PrimaryGeneratedColumn()
@@ -19,7 +20,6 @@ class User {
 
   @UpdateDateColumn({ precision: 0, default: () => 'NOW()' })
   updated_at: Date;
-
 }
 
 export default User;
