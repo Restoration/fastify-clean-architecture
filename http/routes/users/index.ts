@@ -1,7 +1,9 @@
-'use strict'
+import UsersController from '../../controllers/UsersController';
 
-module.exports = async function (fastify, opts) {
-  fastify.get('/', async function (request, reply) {
-    return 'this is an example'
+const controller = new UsersController();
+
+module.exports = async (fastify, opts) => {
+  fastify.get('/', async (request, reply) => {
+    return controller.fetchAll();
   })
 }
