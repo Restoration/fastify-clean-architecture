@@ -1,7 +1,7 @@
 # README
 
 ## Overview
-A fastify is high performance Node.js framework.
+A fastify is a high-performance Node.js 
 
 
 ## How to use
@@ -14,13 +14,7 @@ $ yarn migration:run
 $ yarn start:dev
 ```
 
-You can access to `localhost:3000`.
-
-## Architecture
-This boilerplate was made by clean architecture.
-Please refer below image.
-
-
+You can access `localhost:3000`.
 
 ## Licence
 [MIT](https://github.com/Restoration/fastify-clean-architecture/blob/master/LICENSE)

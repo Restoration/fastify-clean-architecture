@@ -17,11 +17,6 @@ const fastify = Fastify({
 fastify.use('/', serveStatic('assets', { index: ['index.html'] }));
 fastify.register(cookie);
 
-fastify.listen(PORT, (err, address) => {
-  if (err) throw err;
-  fastify.log.info(`server listening on ${address}`);
-});
-
 fastify.register(Env, {
   schema: S.object()
     .prop('NODE_ENV', S.string().required())
@@ -39,4 +34,9 @@ fastify.register(UnderPressure, {
 
 fastify.register(Cors, {
   origin: false
+});
+
+fastify.listen(PORT, (err, address) => {
+  if (err) throw err;
+  fastify.log.info(`server listening on ${address}`);
 });
