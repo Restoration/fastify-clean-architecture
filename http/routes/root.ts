@@ -1,7 +1,11 @@
-'use strict';
+import UsersRoute from './users';
 
-module.exports = async function (fastify, opts) {
-  fastify.get('/', async function (request, reply) {
-    return { root: true };
-  });
+const Router = (server: any): void => {
+  const users = new UsersRoute();
+
+  server.register([
+    users.initRoutes
+  ]);
 };
+
+export default Router;

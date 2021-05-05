@@ -1,9 +1,15 @@
 import UsersController from '../../controllers/UsersController';
 
-const controller = new UsersController();
+export default class UsersRoute {
+  
+  initRoutes(server: any, opts: any, next: any): void  {
+    server.get('/users', this.getHandler);
+    next();
+  }
 
-module.exports = async (fastify, opts) => {
-  fastify.get('/', async (request, reply) => {
-    return controller.fetchAll();
-  });
-};
+  getHandler(req: any, reply: any) {
+    const controller: UsersController = new UsersController();
+    reply.header('Content-Type', 'application/json').code(200);
+    reply.send(controller.fetchAll());
+  }
+}
