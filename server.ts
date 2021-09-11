@@ -3,14 +3,13 @@ import Sensible from 'fastify-sensible';
 import Cors from 'fastify-cors';
 import UnderPressure from 'under-pressure';
 import cookie from 'fastify-cookie';
-import Router from './http/routes/root';
+import userRouter from './http/routes/users';
 
 const PORT = 3000;
 
 const fastify = Fastify({
   logger: true
 });
-
 
 class Server {
   constructor() {
@@ -33,8 +32,8 @@ class Server {
       origin: false
     });
     
-    Router(fastify)
-    
+    userRouter(fastify);
+
     fastify.listen(PORT, (err, address) => {
       if (err) throw err;
       fastify.log.info(`server listening on ${address}`);

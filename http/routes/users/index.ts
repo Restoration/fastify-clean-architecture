@@ -1,15 +1,12 @@
 import UsersController from '../../controllers/UsersController';
 
-export default class UsersRoute {
-  
-  initRoutes(server: any, opts: any, next: any): void  {
-    server.get('/users', this.getHandler);
-    next();
-  }
+async function userRouter (fastify) {
 
-  getHandler(req: any, reply: any) {
+  // Get all users
+  fastify.get('/users', () => {
     const controller: UsersController = new UsersController();
-    reply.header('Content-Type', 'application/json').code(200);
-    reply.send(controller.fetchAll());
-  }
+    return controller.fetchAll();
+  });
 }
+
+export default userRouter;
