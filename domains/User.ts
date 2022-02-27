@@ -6,30 +6,30 @@ class User {
     private readonly _email: string,
     private readonly _password: string,
     private readonly _createdAt: string,
-    private readonly _updatedAt: string
+    private readonly _updatedAt: string,
   ) {}
 
-  public id() {
+  public id(): number {
     return this._id;
   }
 
-  public name() {
+  public name(): string {
     return this._name;
   }
 
-  public email() {
+  public email(): string {
     return this._email;
   }
 
-  public password() {
+  public password(): string {
     return this._password;
   }
 
-  public createdAt() {
+  public createdAt(): string {
     return this._createdAt;
   }
 
-  public updatedAt() {
+  public updatedAt(): string {
     return this._updatedAt;
   }
 }

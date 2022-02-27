@@ -4,13 +4,18 @@ module.exports = {
       project: 'tsconfig.json',
       sourceType: 'module',
     },
-    extends: 'standard-with-typescript',
-    plugins: ['@typescript-eslint/eslint-plugin'],
+    plugins: ['@typescript-eslint/eslint-plugin', 'eslint-plugin-import-helpers'],
+    extends: [
+      'plugin:@typescript-eslint/recommended',
+      'plugin:prettier/recommended',
+    ],
     root: true,
     env: {
       node: true,
       jest: true,
+      es6: true
     },
+    ignorePatterns: ['.eslintrc.js'],
     rules: {
       'no-console': 'warn',
       'no-var': 'error',
@@ -29,6 +34,24 @@ module.exports = {
       '@typescript-eslint/promise-function-async': 'off',
       '@typescript-eslint/restrict-template-expressions': 'off',
       '@typescript-eslint/return-await': 'off',
+      'import-helpers/order-imports': [
+        'warn',
+        {
+          newlinesBetween: 'always',
+          groups: [
+            'module',
+            [
+              '/^application/',
+              '/^presentation/',
+              '/^domain/',
+              '/^infrastructure/',
+            ],
+    
+            ['parent', 'sibling', 'index'],
+          ],
+          alphabetize: { order: 'asc', ignoreCase: true },
+        },
+      ],
     },
 };
   

@@ -1,44 +1,44 @@
+import dotenv from 'dotenv';
 import Fastify from 'fastify';
-import Sensible from 'fastify-sensible';
-import Cors from 'fastify-cors';
-import UnderPressure from 'under-pressure';
 import cookie from 'fastify-cookie';
-import userRouter from './http/routes/users';
+import Cors from 'fastify-cors';
+import Sensible from 'fastify-sensible';
+import sourceMapSupport from 'source-map-support';
+import { createConnection, Connection } from 'typeorm';
+import UnderPressure from 'under-pressure';
 
-const PORT = 3000;
+import userRouter from './infrastructure/routes/users';
 
-const fastify = Fastify({
-  logger: true
-});
+dotenv.config();
 
-class Server {
-  constructor() {
-    this.init();
-  }
+(async (): Promise<void> => {
+  const fastify = Fastify({
+    logger: true,
+  });
 
-  public init(): void {
-    fastify.register(cookie);
+  sourceMapSupport.install();
 
-    fastify.register(Sensible);
-    
-    fastify.register(UnderPressure, {
-      maxEventLoopDelay: 1000,
-      maxHeapUsedBytes: 1000000000,
-      maxRssBytes: 1000000000,
-      maxEventLoopUtilization: 0.98
-    });
-    
-    fastify.register(Cors, {
-      origin: false
-    });
-    
-    userRouter(fastify);
+  const connection: Connection = await createConnection();
 
-    fastify.listen(PORT, (err, address) => {
-      if (err) throw err;
-      fastify.log.info(`server listening on ${address}`);
-    });    
-  }
-}
+  fastify.register(cookie);
 
-new Server();
+  fastify.register(Sensible);
+
+  fastify.register(UnderPressure, {
+    maxEventLoopDelay: 1000,
+    maxHeapUsedBytes: 1000000000,
+    maxRssBytes: 1000000000,
+    maxEventLoopUtilization: 0.98,
+  });
+
+  fastify.register(Cors, {
+    origin: false,
+  });
+
+  userRouter(fastify, connection);
+
+  fastify.listen(process.env.PORT, (err, address) => {
+    if (err) throw err;
+    fastify.log.info(`server listening on ${address}`);
+  });
+})();

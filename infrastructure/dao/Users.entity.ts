@@ -1,8 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, BaseEntity } from 'typeorm';
 
-// Model
+// UserModel
 @Entity()
-class User {
+class Users extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: string;
 
@@ -22,4 +22,4 @@ class User {
   updated_at: Date;
 }
 
-export default User;
+export default Users;

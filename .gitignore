@@ -59,4 +59,5 @@ profile*
 
 dist
 .env
-infrastructure/mysql/volumes
+
+volumes
